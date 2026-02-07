@@ -9,8 +9,14 @@
   font-size: 24px;
 }
 
-.sidebar__hamburger__translate {
-  transform: translateX(300px);
+/* .sidebar__hamburger__translate removed in favor of body class */
+/* Move hamburger inside the sidebar (sidebar width 300px - padding/icon size) */
+.nav-open .sidebar__hamburger {
+  transform: translateX(250px);
+  color: #000;
+  /* Ensure visibility on sidebar background */
+  z-index: 60;
+  /* Ensure it's above sidebar content (50) */
 }
 
 .sidebar__content {
@@ -19,7 +25,8 @@
   background: #f2f3f7;
   position: fixed;
   top: 0;
-  left: -300px; /* initially 0 for dev*/
+  left: -300px;
+  /* initially 0 for dev*/
   overflow-y: scroll;
   transition-duration: 500ms;
   display: flex;
@@ -28,8 +35,22 @@
   z-index: 50;
 }
 
-.sidebar__hamburger__translate + .sidebar__content {
+.nav-open .sidebar__content {
   transform: translateX(300px);
+}
+
+.main-content {
+  transition-duration: 500ms;
+  width: 100%;
+  /* Default, but explicit helps understanding */
+}
+
+/* Resize content instead of pushing off-screen */
+.nav-open .main-content {
+  margin-left: 300px;
+  /* Push content to start after sidebar */
+  width: calc(100% - 300px);
+  /* Resize to fit remaining space */
 }
 
 .sidebar__image {
@@ -57,7 +78,7 @@
   text-transform: uppercase;
 }
 
-.sidebar__job > span {
+.sidebar__job>span {
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -105,6 +126,6 @@
   line-height: 2;
 }
 
-.sidebar__copyright > span {
+.sidebar__copyright>span {
   color: #2c98f0;
 }
